@@ -1,131 +1,70 @@
 /* Enter your solutions in this file */
 #include <stdio.h>
-#include <assert.h>
+int max(int a[], int n){
+      int large=a[0];
+    for(int i=0;i<n;i++){
+      if (a[i]>large)
+       large=a[i];
+     printf("max is %i \n",large);}
+       return large;
+       }
+int min(int a[], int n){
+      int small=a[0];
+    for(int i=0;i<n;i++){
+      if (small>a[i])
+       small=a[i];
+     printf("min is %i \n",small);}
+       return small;
+       }
+float average(int a[], int n){
+      int sum=0;
+      float avg;
+    for(int i=0;i<n;i++)
+      sum+=a[i];
+       avg=(float)sum/n;
+     printf("average is %f \n",avg);
+       return avg;
+       }
 
-
-int max(int [], int);
-int min(int [], int);
-float average(int [], int);
-int mode(int [], int);
-int factors(int, int []);
-int main(void) {
-  int x[] = {9,5,6,10,2,-3,4};
-  assert (max(x, 7) == 10);
-
-  int y[] = {5};
-  assert (max(y, 1) == 5);
-  printf("Max: passed\n");
-
-  int a[] = {9,5,6,10,2,-3,4};
-  assert (min(a, 7) == -3);
-
-  int b[] = {5};
-  assert (min(b, 1) == 5);
-  printf("Min: passed\n");
-
-  int c[] = {9,5,6,10,2,-3,4};
-  assert ((average(c, 7) - 4.7142) < 0.001);
-
-  int d[] = {5};
-  assert (average(d, 1) == 5.0);
-  printf("Average: passed\n");
-
-  int e[] = {4, 9,5,6,5,10,0,2,-3, -3,4, 4};
-  assert ((mode(e, 12) == 4));
-
-  int f[] = {5};
-  assert (mode(f, 1) == 5);
-  printf("Mode: passed\n");
-
-  int ret[100] = {0};
-  int count = factors(180, ret);
-  assert (count == 5);
-  assert (ret[0] == 2);
-  assert (ret[1] == 2);
-  assert (ret[2] == 3);
-  assert (ret[3] == 3);
-  assert (ret[4] == 5);
-
-
-  count = factors(143, ret);
-  assert (count == 2);
-  assert (ret[0] == 11);
-  assert (ret[1] == 13);
-  printf("Factors: passed\n");
-  
-  return 0;
-  }
-
-  int max(int a[100],int n)
-{
-  int m=a[0];
-  for(int i=1;i<n;++i)
-  {
-    if(a[i]>m)
-      m=a[i];
-  }
-  return m;
-}
-int min(int t[100],int n)
-{
-  int m=t[0];
-  for(int i=1;i<n;++i)
-  {
-    if(t[i]<m)
-      m=t[i];
-  }
-  return m;
-}
-float average(int t[100], int n)
-{
-  int s=0;
-  for(int i=0;i<n;i++)
-    s+=t[i];
-  return (float)(s/n);
-}
-int mode(int a[100], int n)
-{
-  int mode=a[0];
-  int count=0;
-  int max=0;
-  if(n==1)
-    return a[0];
-  for(int i=0;i<n;i++)
-  {
-    for(int j=i+1;j<n;j++)
-    {
+   int mode(int a[], int n){
+      int c[n],count,large=c[0],i,no;
+    for( i=0;i<n;i++){
+        count=0;
+    for(int j=0;j<n;j++){
       if(a[i]==a[j])
-        count++;
-    }
-    if(count>max)
-    {
-     max=count;
-     mode=a[i];
-    }
-    }
-return mode;
-}
-int factors(int n, int a[])
-{
-  int count=0;
-  for(int i=0;i<100;++i)
-  {
-    if(n>0 && n!=1)
-    {
-      for(int j=2;j<100;j++)
-      {
-        if(n%j==0)
-        {
-          a[i]=j;
-          count++;
-          n=n/j;
-          break;
-        }
-
-      }
-    }
-    else
-      break;
-  }
-    return count;
-}
+         count++;
+         }
+       c[i]=count;
+       printf("%ith element of array c is %i \n",i,c[i]);}
+    for(i=0;i<n;i++){
+      if (c[i]>large)
+         no=i;
+        large=a[i];
+     printf("max is %i \n",large);
+     printf("%i\n",no);
+     printf("%i \n",a[i]);
+        return a[i];
+       }
+   }   
+int factors(int x, int a[]){
+  int i,j,count,num=0;
+  for(i=2;i<=x;i++){
+  count=0;
+    if((x%i==0)){
+    for(j=1;j<=i;j++){
+       if((i%j==0)){
+         count++;
+          }
+       }
+    if(count<=2){
+        while(x%i==0){
+           a[num]=i;
+           x=x/i;
+           num++;
+          }
+         }
+         }
+            
+            }
+     return num;
+           }
